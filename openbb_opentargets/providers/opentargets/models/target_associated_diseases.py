@@ -34,7 +34,7 @@ query TargetAssociatedDiseases($id: String!, $size: Int!) {
 class TargetAssociatedDiseasesQueryParams(QueryParams):
     """Query parameters."""
 
-    query: str = Field(
+    target: str = Field(
         description=(
             "Target identifier. Accepts an Ensembl gene ID (e.g. ENSG00000141510) "
             "or a free-text gene name (e.g. TP53) which will be resolved via search."
@@ -86,7 +86,7 @@ class TargetAssociatedDiseasesFetcher(
         credentials: dict[str, str] | None,
         **kwargs: Any,
     ) -> list[dict]:
-        ensembl_id = resolve_target_id(query.query)
+        ensembl_id = resolve_target_id(query.target)
         if not ensembl_id:
             return []
         data = graphql_request(_QUERY, {"id": ensembl_id, "size": query.limit})

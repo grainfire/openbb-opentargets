@@ -20,10 +20,10 @@ router = Router(prefix="")
 @router.command(
     model="OpenTargetsSearch",
     examples=[
-        APIEx(parameters={"query": "TP53", "provider": "opentargets"}),
+        APIEx(parameters={"q": "TP53", "provider": "opentargets"}),
         APIEx(
             parameters={
-                "query": "rheumatoid arthritis",
+                "q": "rheumatoid arthritis",
                 "entity": "disease",
                 "provider": "opentargets",
             }
@@ -43,10 +43,10 @@ async def search(
 @router.command(
     model="TargetAssociatedDiseases",
     examples=[
-        APIEx(parameters={"query": "TP53", "provider": "opentargets"}),
+        APIEx(parameters={"target": "TP53", "provider": "opentargets"}),
         APIEx(
             parameters={
-                "query": "ENSG00000141510",
+                "target": "ENSG00000141510",
                 "limit": 50,
                 "provider": "opentargets",
             }
@@ -68,13 +68,13 @@ async def target_associated_diseases(
     examples=[
         APIEx(
             parameters={
-                "query": "rheumatoid arthritis",
+                "disease": "rheumatoid arthritis",
                 "provider": "opentargets",
             }
         ),
         APIEx(
             parameters={
-                "query": "EFO_0000685",
+                "disease": "EFO_0000685",
                 "limit": 50,
                 "provider": "opentargets",
             }

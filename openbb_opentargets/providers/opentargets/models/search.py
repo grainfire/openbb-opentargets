@@ -28,7 +28,7 @@ query Search($q: String!, $entity: [String!], $size: Int!) {
 class OpenTargetsSearchQueryParams(QueryParams):
     """Query parameters for Open Targets search."""
 
-    query: str = Field(description="Free-text search string (gene, disease, or drug).")
+    q: str = Field(description="Free-text search string (gene, disease, or drug).")
     entity: str | None = Field(
         default=None,
         description=(
@@ -69,7 +69,7 @@ class OpenTargetsSearchFetcher(
         entity = [query.entity] if query.entity else ["target", "disease", "drug"]
         data = graphql_request(
             _QUERY,
-            {"q": query.query, "entity": entity, "size": query.limit},
+            {"q": query.q, "entity": entity, "size": query.limit},
         )
         return ((data.get("search") or {}).get("hits")) or []
 

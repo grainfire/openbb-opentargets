@@ -34,7 +34,7 @@ query DiseaseAssociatedTargets($id: String!, $size: Int!) {
 class DiseaseAssociatedTargetsQueryParams(QueryParams):
     """Query parameters."""
 
-    query: str = Field(
+    disease: str = Field(
         description=(
             "Disease identifier. Accepts an ontology ID (e.g. EFO_0000685, "
             "MONDO_0004979) or a free-text disease name, which will be resolved "
@@ -86,7 +86,7 @@ class DiseaseAssociatedTargetsFetcher(
         credentials: dict[str, str] | None,
         **kwargs: Any,
     ) -> list[dict]:
-        efo_id = resolve_disease_id(query.query)
+        efo_id = resolve_disease_id(query.disease)
         if not efo_id:
             return []
         data = graphql_request(_QUERY, {"id": efo_id, "size": query.limit})
