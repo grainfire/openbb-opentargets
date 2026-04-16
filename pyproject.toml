@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "openbb-opentargets"
+version = "0.0.1"
+description = "OpenBB OpenTargets"
+authors = ["Derek <grainfire@gmail.com>"]
+readme = "README.md"
+license = "AGPL-3.0-only"
+packages = [{ include = "openbb_opentargets" }]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4"
+openbb-core = "*"
+openbb-platform-api = "*"
+
+[tool.poetry.group.dev.dependencies]
+openbb-devtools = { version = "*" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins."openbb_core_extension"]
+open_targets = "openbb_opentargets.routers.open_targets:router"
+
+[tool.poetry.plugins."openbb_charting_extension"]
+open_targets = "openbb_opentargets.routers.open_targets_views:OpenTargetsViews"
+
+[tool.poetry.plugins."openbb_provider_extension"]
+opentargets = "openbb_opentargets.providers.opentargets:opentargets_provider"
+
+[tool.poetry.plugins."openbb_obbject_extension"]
+to_string = "openbb_opentargets.obbject.open_targets:ext"
+open_targets = "openbb_opentargets.obbject.open_targets:class_ext"
+# Uncomment to use
+# nonblocking_plugin = "openbb_opentargets.obbject.open_targets:nonblocking_plugin"

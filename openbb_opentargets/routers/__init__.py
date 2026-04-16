@@ -1,0 +1,1 @@
+"""OpenBB OpenTargets routers module."""
